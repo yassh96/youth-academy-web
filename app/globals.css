@@ -1,26 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ── Tailwind v4 theme tokens ─────────────────────────────── */
+@theme {
+  /* Colors */
+  --color-gold:        #C9A558;
+  --color-gold-light:  #D4B574;
+  --color-gold-dark:   #A8873E;
+  --color-gold-subtle: #F5EDD8;
+
+  --color-off-black:   #0A0A0A;
+  --color-rich-black:  #080808;
+
+  /* Fonts */
+  --font-outfit: var(--font-outfit), 'Outfit', sans-serif;
+  --font-inter:  var(--font-inter), 'Inter', sans-serif;
+
+  /* Radii */
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base resets ─────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
+  background-color: #ffffff;
+  color: #111111;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── Typography helpers ──────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* ── Gold accent utilities ───────────────────────────────── */
+.text-gold       { color: #C9A558; }
+.bg-gold         { background-color: #C9A558; }
+.border-gold     { border-color: #C9A558; }
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    #C9A558 0%,
+    #D4B574 50%,
+    #C9A558 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Section spacing ─────────────────────────────────────── */
+.section-pad {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+@media (min-width: 768px) {
+  .section-pad {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+/* ── Glassmorphism ───────────────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 165, 88, 0.2);
+}
+
+.glass-dark {
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 165, 88, 0.2);
+}
+
+/* ── Card shadow ─────────────────────────────────────────── */
+.card-shadow {
+  box-shadow:
+    0 1px 3px rgba(0,0,0,0.04),
+    0 4px 16px rgba(0,0,0,0.06),
+    0 12px 40px rgba(0,0,0,0.04);
+}
+
+.card-shadow-hover {
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.06),
+    0 16px 48px rgba(0,0,0,0.1);
+}
+
+/* ── Button base ─────────────────────────────────────────── */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #C9A558;
+  color: #000000;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.5rem;
+  border: 1.5px solid #C9A558;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  position: relative;
+  white-space: nowrap;
+}
+
+.btn-gold:hover {
+  background-color: #D4B574;
+  border-color: #D4B574;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,165,88,0.3);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: #111111;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.5rem;
+  border: 1.5px solid #111111;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-outline:hover {
+  background-color: #111111;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn-outline-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: #ffffff;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.5rem;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-outline-white:hover {
+  background-color: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.8);
+  transform: translateY(-2px);
+}
+
+/* ── Selection ───────────────────────────────────────────── */
+::selection {
+  background-color: #C9A558;
+  color: #000;
+}
+
+/* ── Focus ring ──────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #C9A558;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: #f5f5f5; }
+::-webkit-scrollbar-thumb {
+  background: #C9A558;
+  border-radius: 3px;
+}
+
+/* ── Input ────────────────────────────────────────────────── */
+.input-premium {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  border: 1.5px solid #E5E5E5;
+  border-radius: 0.5rem;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.9rem;
+  color: #111;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.input-premium:focus {
+  border-color: #C9A558;
+  box-shadow: 0 0 0 3px rgba(201,165,88,0.15);
+}
+.input-premium::placeholder {
+  color: #AAAAAA;
+}
+
+.textarea-premium {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  border: 1.5px solid #E5E5E5;
+  border-radius: 0.5rem;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.9rem;
+  color: #111;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  resize: vertical;
+  min-height: 140px;
+}
+.textarea-premium:focus {
+  border-color: #C9A558;
+  box-shadow: 0 0 0 3px rgba(201,165,88,0.15);
 }
