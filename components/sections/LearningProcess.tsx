@@ -8,7 +8,7 @@ import { ArrowDown } from "lucide-react";
 
 export default function LearningProcess() {
   return (
-    <section className="section-pad bg-black overflow-hidden">
+    <section className="section-pad bg-gray-50/70 border-b border-gray-100 overflow-hidden">
       <div className="max-w-4xl mx-auto px-5 lg:px-8">
         {/* Header */}
         <ScrollReveal>
@@ -21,9 +21,8 @@ export default function LearningProcess() {
                   <span className="text-[#C9A558]">Success</span>
                 </>
               }
-              subtitle="A clear, structured path from where you are to where you want to be."
+              subtitle="A clear, structured 5-step path from where you are to where you want to be."
               center
-              light
             />
           </div>
         </ScrollReveal>
@@ -31,16 +30,16 @@ export default function LearningProcess() {
         {/* Timeline */}
         <div className="relative">
           {/* Vertical connecting line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 hidden md:block">
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 hidden md:block">
             <motion.div
               className="w-full h-full origin-top"
               style={{
-                background: "linear-gradient(to bottom, #C9A558, rgba(201,165,88,0.1))",
+                background: "linear-gradient(to bottom, #C9A558 0%, #D4B574 50%, rgba(201,165,88,0.2) 100%)",
               }}
               initial={{ scaleY: 0 }}
               whileInView={{ scaleY: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
             />
           </div>
 
@@ -48,11 +47,11 @@ export default function LearningProcess() {
             {learningSteps.map((step, i) => {
               const isLeft = i % 2 === 0;
               return (
-                <ScrollReveal key={step.step} delay={i * 0.15}>
+                <ScrollReveal key={step.step} delay={i * 0.12}>
                   <div
                     className={`relative flex items-center gap-6 md:gap-0 ${
                       isLeft ? "md:flex-row" : "md:flex-row-reverse"
-                    } mb-2`}
+                    } mb-3`}
                   >
                     {/* Content card */}
                     <motion.div
@@ -62,23 +61,23 @@ export default function LearningProcess() {
                         isLeft ? "md:mr-auto md:pr-10" : "md:ml-auto md:pl-10"
                       }`}
                     >
-                      <div className="bg-gray-900 rounded-2xl border border-gray-800 p-6 hover:border-[#C9A558]/40 transition-colors duration-300 group">
+                      <div className="bg-white rounded-2xl border border-gray-200/80 p-6 card-shadow hover:card-shadow-hover hover:border-[#C9A558]/50 transition-all duration-300 group">
                         <div className="flex items-start gap-4">
                           <span
-                            className="text-3xl font-bold text-[#C9A558] opacity-40 group-hover:opacity-70 transition-opacity"
+                            className="text-3xl font-extrabold text-[#C9A558] opacity-80 group-hover:opacity-100 transition-opacity shrink-0"
                             style={{ fontFamily: "var(--font-outfit)" }}
                           >
                             {step.step}
                           </span>
                           <div>
                             <h3
-                              className="text-base font-semibold text-white mb-2 group-hover:text-[#C9A558] transition-colors"
+                              className="text-base font-bold text-gray-900 mb-2 group-hover:text-[#C9A558] transition-colors"
                               style={{ fontFamily: "var(--font-outfit)" }}
                             >
                               {step.title}
                             </h3>
                             <p
-                              className="text-sm text-gray-500 leading-relaxed"
+                              className="text-sm text-gray-600 leading-relaxed"
                               style={{ fontFamily: "var(--font-inter)" }}
                             >
                               {step.description}
@@ -89,13 +88,13 @@ export default function LearningProcess() {
                     </motion.div>
 
                     {/* Center node */}
-                    <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full items-center justify-center bg-black border-2 border-[#C9A558] z-10 shrink-0">
-                      <div className="w-3 h-3 rounded-full bg-[#C9A558]" />
+                    <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-9 h-9 rounded-full items-center justify-center bg-white border-2 border-[#C9A558] z-10 shrink-0 shadow-md">
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#C9A558]" />
                     </div>
 
                     {/* Arrow for mobile */}
                     {i < learningSteps.length - 1 && (
-                      <div className="md:hidden absolute -bottom-5 left-5 text-[#C9A558]">
+                      <div className="md:hidden absolute -bottom-5 left-6 text-[#C9A558]">
                         <ArrowDown size={18} />
                       </div>
                     )}
@@ -103,7 +102,7 @@ export default function LearningProcess() {
 
                   {/* Spacer between steps */}
                   {i < learningSteps.length - 1 && (
-                    <div className="h-10 md:h-12" />
+                    <div className="h-8 md:h-12" />
                   )}
                 </ScrollReveal>
               );

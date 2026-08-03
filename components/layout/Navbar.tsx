@@ -23,14 +23,13 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 30);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
@@ -44,7 +43,7 @@ export default function Navbar() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
             ? "bg-white/95 backdrop-blur-md shadow-md border-b border-gray-100 py-3"
-            : "bg-transparent py-4"
+            : "bg-white/90 backdrop-blur-sm border-b border-gray-100/80 py-4"
         }`}
       >
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
@@ -61,9 +60,7 @@ export default function Navbar() {
               />
               <div className="hidden sm:block">
                 <span
-                  className={`font-outfit font-bold text-sm leading-tight block ${
-                    scrolled ? "text-gray-900" : "text-white"
-                  }`}
+                  className="font-outfit font-bold text-sm leading-tight block text-gray-900"
                 >
                   Youth Success
                 </span>
@@ -91,9 +88,7 @@ export default function Navbar() {
                     className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
                       isActive
                         ? "text-[#C9A558] font-semibold"
-                        : scrolled
-                        ? "text-gray-700 hover:text-black hover:bg-gray-50"
-                        : "text-white/85 hover:text-white hover:bg-white/10"
+                        : "text-gray-700 hover:text-black hover:bg-gray-100/60"
                     }`}
                   >
                     {link.label}
@@ -112,18 +107,14 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               <Link
                 href="/contact"
-                className="hidden lg:inline-flex btn-gold text-xs uppercase tracking-wider py-2.5 px-5 font-semibold"
+                className="hidden lg:inline-flex btn-gold text-xs uppercase tracking-wider py-2.5 px-5 font-semibold shadow-sm"
               >
                 Book Free Counseling
               </Link>
 
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className={`lg:hidden p-2.5 rounded-xl transition-colors ${
-                  scrolled
-                    ? "text-gray-800 hover:bg-gray-100"
-                    : "text-white hover:bg-white/10"
-                }`}
+                className="lg:hidden p-2.5 rounded-xl transition-colors text-gray-800 hover:bg-gray-100"
                 aria-label="Toggle Navigation Menu"
               >
                 {menuOpen ? <X size={24} /> : <Menu size={24} />}
