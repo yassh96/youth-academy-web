@@ -1,16 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import {
-  MapPin,
-  Mail,
-  Phone,
-  PhoneCall,
-  Send,
-  CheckCircle2,
-} from "lucide-react";
+import { MapPin, Mail, Phone, PhoneCall } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import LeadContactForm from "@/components/ui/LeadContactForm";
 
 function WhatsAppIcon({ size = 18 }: { size?: number }) {
   return (
@@ -40,38 +32,19 @@ const contactInfo = [
   },
   {
     icon: Phone,
-    label: "Call Us",
+    label: "Call Us Direct",
     lines: ["+91 9175386755"],
     href: "tel:+919175386755",
   },
 ];
 
 export default function ContactPage() {
-  const [form, setForm] = useState({
-    name: "", phone: "", email: "", message: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 1200);
-  };
-
   return (
     <main>
       {/* Hero */}
-      <section className="bg-black pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden text-white">
+      <section className="bg-gradient-to-b from-amber-50/50 via-white to-white pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden text-gray-900 border-b border-gray-100">
         <div
-          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
           style={{
             backgroundImage:
               "linear-gradient(rgba(201,165,88,1) 1px, transparent 1px), linear-gradient(90deg, rgba(201,165,88,1) 1px, transparent 1px)",
@@ -79,56 +52,47 @@ export default function ContactPage() {
           }}
         />
         <div className="relative z-10 max-w-4xl mx-auto px-5 lg:px-8 text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+          <p
             className="text-xs font-semibold uppercase tracking-[0.2em] text-[#C9A558] mb-4"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             Get In Touch
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-5"
+          </p>
+          <h1
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-5"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             Let&apos;s <span className="text-[#C9A558]">Connect</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-gray-300 text-base md:text-lg max-w-xl mx-auto leading-relaxed"
+          </h1>
+          <p
+            className="text-gray-600 text-base md:text-lg max-w-xl mx-auto leading-relaxed"
             style={{ fontFamily: "var(--font-inter)" }}
           >
-            Have a question, or want to book your free counseling session? 
-            We&apos;d love to hear from you.
-          </motion.p>
+            Have a question or ready to take your career to the next level? Connect directly with our admissions team on WhatsApp.
+          </p>
         </div>
       </section>
 
       {/* Quick action strip */}
-      <div className="bg-[#C9A558]/10 border-b border-[#C9A558]/20 py-5">
+      <div className="bg-[#FDF9F0] border-b border-[#C9A558]/20 py-4">
         <div className="max-w-7xl mx-auto px-5 lg:px-8 flex flex-wrap items-center justify-center gap-4">
           <a
-            href="https://wa.me/919175386755"
+            href="https://wa.me/919175386755?text=Hello%20Youth%20Success%20Academy%2C%20I%20would%20like%20to%20inquire%20about%20your%20programs!"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-[#25D366] text-white font-semibold text-sm hover:bg-[#20BD5C] transition-colors shadow-sm"
+            className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-xl bg-[#25D366] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#20BD5C] transition-colors shadow-sm"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             <WhatsAppIcon size={18} />
-            Chat on WhatsApp
+            Instant WhatsApp Chat (+91 9175386755)
           </a>
           <a
             href="tel:+919175386755"
-            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-black text-white font-semibold text-sm hover:bg-gray-900 transition-colors border border-gray-800 shadow-sm"
+            className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-xl bg-gray-900 text-white font-bold text-xs uppercase tracking-wider hover:bg-black transition-colors shadow-sm"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
-            <PhoneCall size={16} />
-            Call Now
+            <PhoneCall size={15} />
+            Call Admissions (+91 9175386755)
           </a>
         </div>
       </div>
@@ -182,7 +146,7 @@ export default function ContactPage() {
                   </div>
 
                   {/* Map Embed */}
-                  <div className="rounded-2xl overflow-hidden border border-gray-100 card-shadow">
+                  <div className="rounded-2xl overflow-hidden border border-gray-200 card-shadow">
                     <iframe
                       title="YSA Office Location"
                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.8927066218844!2d73.8891!3d18.4601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2ebd7b1c4b1c3%3A0xf68a5c5c4c1b3e4e!2sNyati%20County%2C%20Undri%2C%20Pune!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
@@ -198,146 +162,10 @@ export default function ContactPage() {
               </ScrollReveal>
             </div>
 
-            {/* Right — Form */}
+            {/* Right — Lead WhatsApp Form */}
             <div className="lg:col-span-7">
               <ScrollReveal direction="right">
-                <div className="bg-gray-50 rounded-3xl p-7 md:p-10 border border-gray-100 card-shadow">
-                  <h2
-                    className="text-2xl font-bold text-gray-900 mb-2"
-                    style={{ fontFamily: "var(--font-outfit)" }}
-                  >
-                    Send Us a Message
-                  </h2>
-                  <p
-                    className="text-sm text-gray-500 mb-8"
-                    style={{ fontFamily: "var(--font-inter)" }}
-                  >
-                    Fill in the form below and our team will reach out within 24 hours.
-                  </p>
-
-                  {submitted ? (
-                    <motion.div
-                      initial={{ scale: 0.95, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      className="text-center py-12"
-                    >
-                      <CheckCircle2
-                        size={52}
-                        className="text-[#C9A558] mx-auto mb-4"
-                        strokeWidth={1.5}
-                      />
-                      <h3
-                        className="text-xl font-bold text-gray-900 mb-2"
-                        style={{ fontFamily: "var(--font-outfit)" }}
-                      >
-                        Message Sent Successfully!
-                      </h3>
-                      <p
-                        className="text-sm text-gray-500 max-w-sm mx-auto"
-                        style={{ fontFamily: "var(--font-inter)" }}
-                      >
-                        Thank you for contacting Youth Success Academy. We will get back to you shortly.
-                      </p>
-                    </motion.div>
-                  ) : (
-                    <form id="contact-form" onSubmit={handleSubmit} className="space-y-5">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        <div>
-                          <label
-                            htmlFor="contact-name"
-                            className="block text-xs font-semibold text-gray-700 mb-2"
-                            style={{ fontFamily: "var(--font-outfit)" }}
-                          >
-                            Full Name *
-                          </label>
-                          <input
-                            id="contact-name"
-                            type="text"
-                            name="name"
-                            required
-                            value={form.name}
-                            onChange={handleChange}
-                            placeholder="Your full name"
-                            className="input-premium"
-                          />
-                        </div>
-                        <div>
-                          <label
-                            htmlFor="contact-phone"
-                            className="block text-xs font-semibold text-gray-700 mb-2"
-                            style={{ fontFamily: "var(--font-outfit)" }}
-                          >
-                            Phone Number *
-                          </label>
-                          <input
-                            id="contact-phone"
-                            type="tel"
-                            name="phone"
-                            required
-                            value={form.phone}
-                            onChange={handleChange}
-                            placeholder="+91 XXXXX XXXXX"
-                            className="input-premium"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label
-                          htmlFor="contact-email"
-                          className="block text-xs font-semibold text-gray-700 mb-2"
-                          style={{ fontFamily: "var(--font-outfit)" }}
-                        >
-                          Email Address *
-                        </label>
-                        <input
-                          id="contact-email"
-                          type="email"
-                          name="email"
-                          required
-                          value={form.email}
-                          onChange={handleChange}
-                          placeholder="your@email.com"
-                          className="input-premium"
-                        />
-                      </div>
-
-                      <div>
-                        <label
-                          htmlFor="contact-message"
-                          className="block text-xs font-semibold text-gray-700 mb-2"
-                          style={{ fontFamily: "var(--font-outfit)" }}
-                        >
-                          Message *
-                        </label>
-                        <textarea
-                          id="contact-message"
-                          name="message"
-                          required
-                          value={form.message}
-                          onChange={handleChange}
-                          placeholder="Tell us about your goals or questions..."
-                          className="textarea-premium"
-                        />
-                      </div>
-
-                      <button
-                        type="submit"
-                        disabled={loading}
-                        className="btn-gold w-full py-4 justify-center text-sm font-semibold disabled:opacity-70 shadow-md"
-                      >
-                        {loading ? (
-                          "Sending Message..."
-                        ) : (
-                          <>
-                            Send Message
-                            <Send size={16} />
-                          </>
-                        )}
-                      </button>
-                    </form>
-                  )}
-                </div>
+                <LeadContactForm />
               </ScrollReveal>
             </div>
           </div>
