@@ -84,7 +84,7 @@ export default function ContactPage() {
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             <WhatsAppIcon size={18} />
-            Instant WhatsApp Chat (+91 9175386755)
+            Instant WhatsApp Chat
           </a>
           <a
             href="tel:+919175386755"
@@ -92,7 +92,7 @@ export default function ContactPage() {
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             <PhoneCall size={15} />
-            Call Admissions (+91 9175386755)
+            Call Admissions
           </a>
         </div>
       </div>
