@@ -7,23 +7,22 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { motion } from "framer-motion";
 
-// Course placeholder image using CSS
 function CoursePlaceholder({ category }: { category: string }) {
   const colors: Record<string, string> = {
-    Career:        "#2A2A2A",
-    Leadership:    "#1A1A1A",
-    Business:      "#222222",
-    Communication: "#2A2A2A",
-    Finance:       "#1C1C1C",
-    Personality:   "#202020",
+    "Competitive Exams":      "#1A1A1A",
+    Business:                 "#222222",
+    "Performance & Mindset":  "#1E1E1E",
+    Entrepreneurship:         "#181818",
+    Leadership:               "#242424",
+    "Soft Skills":            "#202020",
   };
   const icons: Record<string, string> = {
-    Career:        "🎯",
-    Leadership:    "🏆",
-    Business:      "💼",
-    Communication: "🎤",
-    Finance:       "💰",
-    Personality:   "✨",
+    "Competitive Exams":      "📖",
+    Business:                 "💼",
+    "Performance & Mindset":  "🧘",
+    Entrepreneurship:         "🚀",
+    Leadership:               "🏆",
+    "Soft Skills":            "✨",
   };
   return (
     <div
@@ -51,7 +50,7 @@ export default function FeaturedCourses() {
         <ScrollReveal>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-14 gap-6">
             <SectionHeading
-              eyebrow="Featured Courses"
+              eyebrow="Our Courses"
               title={
                 <>
                   Programs Built for{" "}
@@ -128,13 +127,12 @@ export default function FeaturedCourses() {
                     </span>
                   </div>
 
-                  {/* CTA */}
+                  {/* CTA button */}
                   <Link
                     href={`/courses#${course.slug}`}
                     className="btn-outline text-sm py-2.5 justify-center w-full group-hover:bg-black group-hover:text-white transition-all duration-200"
                   >
-                    Explore Course
-                    <ArrowRight size={14} />
+                    Learn More →
                   </Link>
                 </div>
               </motion.div>

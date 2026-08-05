@@ -10,139 +10,109 @@ export const trustStats = [
 
 export const whyChooseFeatures = [
   {
-    icon: "Compass",
-    title: "Career Guidance",
+    icon: "BookOpen",
+    title: "Practical Learning",
     description:
-      "Personalised one-on-one roadmaps that help students discover the right career path and take confident first steps.",
+      "Hands-on assignments, real-life case studies, and activities that ensure you can apply what you learn immediately.",
+  },
+  {
+    icon: "Users",
+    title: "Experienced Trainers",
+    description:
+      "Learn from industry experts and certified mentors with years of practical experience.",
+  },
+  {
+    icon: "Compass",
+    title: "Interactive Sessions",
+    description:
+      "Engaging classroom discussions, live practice, and personalized feedback for better learning outcomes.",
+  },
+  {
+    icon: "Target",
+    title: "Personal Guidance",
+    description:
+      "Receive one-on-one mentoring and customized support to overcome your unique challenges.",
   },
   {
     icon: "TrendingUp",
-    title: "Leadership Development",
+    title: "Measurable Results",
     description:
-      "Cultivate the mindset and skills of a leader through structured programs, team challenges, and mentorship.",
-  },
-  {
-    icon: "BarChart2",
-    title: "Business Skills",
-    description:
-      "Learn essential entrepreneurial and business fundamentals that give you an edge in every professional environment.",
-  },
-  {
-    icon: "PiggyBank",
-    title: "Financial Awareness",
-    description:
-      "Build a strong foundation in personal finance, budgeting, and smart money management from day one.",
-  },
-  {
-    icon: "Mic2",
-    title: "Communication Skills",
-    description:
-      "Master public speaking, persuasive writing, and executive presence to communicate ideas with clarity and confidence.",
-  },
-  {
-    icon: "Sparkles",
-    title: "Personality Development",
-    description:
-      "Transform your body language, emotional intelligence, and personal brand to stand out in any room.",
+      "Track your progress through assessments and practical performance improvements that build confidence and success.",
   },
 ];
 
 export const courses = [
   {
     id: 1,
-    slug: "career-clarity-masterclass",
-    category: "Career",
+    slug: "english-for-competitive-exams-interview",
+    category: "Competitive Exams",
     image: "/courses/career.jpg",
-    title: "Career Clarity Masterclass",
+    title: "English for Competitive Exams & Interview",
     description:
-      "A comprehensive program to help students discover their strengths, map career options, and create an actionable 90-day plan.",
-    duration: "6 Weeks",
+      "Master English with proven strategies for competitive exams and job interviews. Improve your grammar, vocabulary, speaking confidence, and interview performance to achieve your career goals.",
+    duration: "1 Month / 6 Months",
     mode: "Online + Offline",
-    badge: "Most Popular",
+    badge: "Popular",
   },
   {
     id: 2,
-    slug: "leadership-foundations",
-    category: "Leadership",
-    image: "/courses/leadership.jpg",
-    title: "Leadership Foundations",
+    slug: "business-growth",
+    category: "Business",
+    image: "/courses/business.jpg",
+    title: "Business Growth",
     description:
-      "Develop core leadership competencies including decision-making, team management, and strategic thinking.",
-    duration: "8 Weeks",
-    mode: "Offline",
+      "Learn practical business strategies to increase sales, build your brand, and grow your business sustainably. Gain actionable insights that deliver measurable results.",
+    duration: "6 Months",
+    mode: "Online + Offline",
     badge: "Featured",
   },
   {
     id: 3,
-    slug: "business-essentials",
-    category: "Business",
-    image: "/courses/business.jpg",
-    title: "Business Essentials for Students",
-    description:
-      "Understand how businesses work, learn marketing basics, and develop an entrepreneurial mindset ready for the real world.",
-    duration: "4 Weeks",
-    mode: "Online",
-    badge: null,
-  },
-  {
-    id: 4,
-    slug: "public-speaking-mastery",
-    category: "Communication",
-    image: "/courses/speaking.jpg",
-    title: "Public Speaking Mastery",
-    description:
-      "Overcome stage fright, structure compelling speeches, and develop a powerful executive presence.",
-    duration: "5 Weeks",
-    mode: "Offline",
-    badge: "New",
-  },
-  {
-    id: 5,
-    slug: "financial-intelligence",
-    category: "Finance",
-    image: "/courses/finance.jpg",
-    title: "Financial Intelligence for Youth",
-    description:
-      "Personal finance fundamentals every young professional must know — saving, investing, budgeting, and wealth building.",
-    duration: "3 Weeks",
-    mode: "Online",
-    badge: null,
-  },
-  {
-    id: 6,
-    slug: "personality-transformation",
-    category: "Personality",
+    slug: "stress-management",
+    category: "Performance & Mindset",
     image: "/courses/personality.jpg",
-    title: "Personality Transformation Program",
+    title: "Stress Management",
     description:
-      "A holistic program covering grooming, confidence, emotional intelligence, and executive presence.",
-    duration: "6 Weeks",
-    mode: "Offline",
-    badge: "Premium",
-  },
-  {
-    id: 7,
-    slug: "interview-job-readiness",
-    category: "Career",
-    image: "/courses/interview.jpg",
-    title: "Interview & Job Readiness",
-    description:
-      "Resume building, mock interviews, LinkedIn optimisation and salary negotiation skills that land jobs.",
-    duration: "3 Weeks",
+      "Develop techniques to manage stress, improve emotional balance, and stay productive under pressure. Build a healthier mindset for personal and professional success.",
+    duration: "1 Month",
     mode: "Online + Offline",
     badge: null,
   },
   {
-    id: 8,
-    slug: "entrepreneur-launchpad",
-    category: "Business",
+    id: 4,
+    slug: "entrepreneurship",
+    category: "Entrepreneurship",
     image: "/courses/entrepreneur.jpg",
-    title: "Entrepreneur Launchpad",
+    title: "Entrepreneurship",
     description:
-      "Go from idea to execution with startup fundamentals, business model design, pitching, and growth strategies.",
-    duration: "10 Weeks",
+      "Turn your ideas into successful ventures with practical entrepreneurial skills. Learn business planning, problem-solving, leadership, and growth strategies from experienced mentors.",
+    duration: "6 Months / 1 Year",
     mode: "Offline",
     badge: "Intensive",
+  },
+  {
+    id: 5,
+    slug: "communication-leadership",
+    category: "Leadership",
+    image: "/courses/leadership.jpg",
+    title: "Communication & Leadership",
+    description:
+      "Enhance your communication skills and become an inspiring leader. Learn how to influence, motivate teams, and build strong professional relationships with confidence.",
+    duration: "6 Months",
+    mode: "Online + Offline",
+    badge: "Recommended",
+  },
+  {
+    id: 6,
+    slug: "communication-soft-skills-development-program",
+    category: "Soft Skills",
+    image: "/courses/speaking.jpg",
+    title: "Communication & Soft Skills Development Program",
+    description:
+      "Build essential workplace skills including communication, presentation, teamwork, personality development, and professional etiquette to excel in every stage of your career.",
+    duration: "1 Year",
+    mode: "Online + Offline",
+    badge: "Comprehensive",
   },
 ];
 
@@ -179,7 +149,7 @@ export const testimonials = [
     id: 1,
     name: "Priya Sharma",
     role: "MBA Graduate, Now Marketing Manager",
-    course: "Career Clarity Masterclass",
+    course: "Communication & Soft Skills",
     review:
       "YSA completely changed how I think about my career. The personalised guidance I received helped me land my dream role at a top FMCG company within 3 months of completing the program.",
     rating: 5,
@@ -190,9 +160,9 @@ export const testimonials = [
     id: 2,
     name: "Rahul Desai",
     role: "Founder, TechStart Pune",
-    course: "Entrepreneur Launchpad",
+    course: "Entrepreneurship",
     review:
-      "The Entrepreneur Launchpad gave me the confidence and framework to start my own company. The mentorship and peer network I built at YSA is invaluable even today.",
+      "The Entrepreneurship program gave me the confidence and framework to start my own company. The mentorship and peer network I built at YSA is invaluable even today.",
     rating: 5,
     avatar: "/testimonials/rahul.jpg",
     initials: "RD",
@@ -201,9 +171,9 @@ export const testimonials = [
     id: 3,
     name: "Sneha Patil",
     role: "BBA Student, Symbiosis University",
-    course: "Public Speaking Mastery",
+    course: "English for Competitive Exams & Interview",
     review:
-      "I used to freeze on stage. After YSA's Public Speaking program, I won our college inter-university debate championship. Life-changing experience!",
+      "I used to freeze during interviews and public speaking. After YSA's program, I cracked my entrance exams and interview smoothly. Life-changing experience!",
     rating: 5,
     avatar: "/testimonials/sneha.jpg",
     initials: "SP",
@@ -212,9 +182,9 @@ export const testimonials = [
     id: 4,
     name: "Arjun Mehta",
     role: "Software Engineer, TCS",
-    course: "Leadership Foundations",
+    course: "Communication & Leadership",
     review:
-      "The Leadership Foundations course helped me transition from an individual contributor to a team lead in under a year. The practical frameworks are immediately applicable.",
+      "The Communication & Leadership course helped me transition from an individual contributor to a team lead in under a year. The practical frameworks are immediately applicable.",
     rating: 5,
     avatar: "/testimonials/arjun.jpg",
     initials: "AM",
@@ -222,10 +192,10 @@ export const testimonials = [
   {
     id: 5,
     name: "Divya Kulkarni",
-    role: "Young Professional, Banking Sector",
-    course: "Financial Intelligence for Youth",
+    role: "Young Professional, Business Sector",
+    course: "Business Growth",
     review:
-      "YSA taught me the financial fundamentals I never learned in college. I've started my SIP, built an emergency fund, and feel genuinely in control of my money now.",
+      "YSA taught me practical business growth fundamentals. I've scaled sales, built our personal brand, and feel genuinely in control of business growth now.",
     rating: 5,
     avatar: "/testimonials/divya.jpg",
     initials: "DK",
@@ -305,12 +275,12 @@ export const newsletterDocs = [
 
 export const courseCategories = [
   "All",
-  "Career",
-  "Leadership",
+  "Competitive Exams",
   "Business",
-  "Communication",
-  "Finance",
-  "Personality",
+  "Performance & Mindset",
+  "Entrepreneurship",
+  "Leadership",
+  "Soft Skills",
 ];
 
 export const blogCategories = [

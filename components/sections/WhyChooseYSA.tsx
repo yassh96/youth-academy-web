@@ -1,12 +1,11 @@
 "use client";
 
 import {
+  BookOpen,
+  Users,
   Compass,
+  Target,
   TrendingUp,
-  BarChart2,
-  PiggyBank,
-  Mic2,
-  Sparkles,
 } from "lucide-react";
 import { whyChooseFeatures } from "@/lib/data";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -14,12 +13,11 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import { motion } from "framer-motion";
 
 const iconMap: Record<string, React.ElementType> = {
+  BookOpen,
+  Users,
   Compass,
+  Target,
   TrendingUp,
-  BarChart2,
-  PiggyBank,
-  Mic2,
-  Sparkles,
 };
 
 export default function WhyChooseYSA() {
@@ -29,14 +27,14 @@ export default function WhyChooseYSA() {
         <ScrollReveal>
           <div className="text-center mb-16">
             <SectionHeading
-              eyebrow="Why Choose YSA"
+              eyebrow="Why Our Courses Work"
               title={
                 <>
-                  Everything You Need to{" "}
-                  <span className="text-[#C9A558]">Succeed</span>
+                  Why Our Courses{" "}
+                  <span className="text-[#C9A558]">Work</span>
                 </>
               }
-              subtitle="We blend practical training with real-world mentorship to build skills that matter — in your career and in life."
+              subtitle="Proven methodology, expert guidance, and practical training designed to create real performance improvements."
               center
             />
           </div>

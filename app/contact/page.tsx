@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPin, Mail, Phone, PhoneCall } from "lucide-react";
+import { MapPin, Mail, Phone, PhoneCall, Globe } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import LeadContactForm from "@/components/ui/LeadContactForm";
 
@@ -15,26 +15,32 @@ function WhatsAppIcon({ size = 18 }: { size?: number }) {
 const contactInfo = [
   {
     icon: MapPin,
-    label: "Office Address",
+    label: "Address",
     lines: [
-      "YSA Office, 1st Floor, Trapezium",
-      "Opp. Nyati Ebony, Corinthians Club",
-      "Nyati County, Undri, Pune",
-      "Maharashtra 411060",
+      "Youth Success Academy",
+      "Office No. 402, 4th Floor, Landmark Centre",
+      "Opp. City International School, Near Euro School",
+      "Mohammed Wadi, Undri, Pune – 411060",
     ],
-    href: "https://maps.google.com/?q=Nyati+County+Undri+Pune",
+    href: "https://maps.google.com/?q=Landmark+Centre+Mohammed+Wadi+Undri+Pune",
+  },
+  {
+    icon: Phone,
+    label: "Phone Number",
+    lines: ["+91 91753 86755"],
+    href: "tel:+919175386755",
   },
   {
     icon: Mail,
-    label: "Email Us",
+    label: "Email ID",
     lines: ["info@youthsuccessacademy.in"],
     href: "mailto:info@youthsuccessacademy.in",
   },
   {
-    icon: Phone,
-    label: "Call Us Direct",
-    lines: ["+91 9175386755"],
-    href: "tel:+919175386755",
+    icon: Globe,
+    label: "Website",
+    lines: ["https://youthsuccessacademy.in"],
+    href: "https://youthsuccessacademy.in",
   },
 ];
 
@@ -149,7 +155,7 @@ export default function ContactPage() {
                   <div className="rounded-2xl overflow-hidden border border-gray-200 card-shadow">
                     <iframe
                       title="YSA Office Location"
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.8927066218844!2d73.8891!3d18.4601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2ebd7b1c4b1c3%3A0xf68a5c5c4c1b3e4e!2sNyati%20County%2C%20Undri%2C%20Pune!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.8927066218844!2d73.8891!3d18.4601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2ebd7b1c4b1c3%3A0xf68a5c5c4c1b3e4e!2sMohammed%20Wadi%2C%20Undri%2C%20Pune!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                       width="100%"
                       height="280"
                       style={{ border: 0 }}
@@ -162,7 +168,7 @@ export default function ContactPage() {
               </ScrollReveal>
             </div>
 
-            {/* Right — Lead WhatsApp Form */}
+            {/* Right — Lead Form */}
             <div className="lg:col-span-7">
               <ScrollReveal direction="right">
                 <LeadContactForm />
