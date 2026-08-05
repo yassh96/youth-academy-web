@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPin, Mail, Phone, PhoneCall, Globe } from "lucide-react";
+import { MapPin, Mail, Phone, PhoneCall } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import LeadContactForm from "@/components/ui/LeadContactForm";
 
@@ -35,12 +35,6 @@ const contactInfo = [
     label: "Email ID",
     lines: ["info@youthsuccessacademy.in"],
     href: "mailto:info@youthsuccessacademy.in",
-  },
-  {
-    icon: Globe,
-    label: "Website",
-    lines: ["https://youthsuccessacademy.in"],
-    href: "https://youthsuccessacademy.in",
   },
 ];
 

@@ -4,14 +4,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
-function WhatsAppIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-    </svg>
-  );
-}
-
 interface LeadFormState {
   name: string;
   email: string;
@@ -45,14 +37,14 @@ export const courseOptions = [
 
 export const durationOptions = ["1 Month", "6 Months", "1 Year"];
 
-export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?: string }) {
+export default function LeadContactForm() {
   const initialFormState: LeadFormState = {
     name: "",
     email: "",
     phone: "",
     city: "",
-    course: defaultCourse || courseOptions[0],
-    duration: durationOptions[0],
+    course: "",
+    duration: "",
     message: "",
   };
 
@@ -61,25 +53,24 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submittedName, setSubmittedName] = useState("");
-  const [submittedCourse, setSubmittedCourse] = useState("");
   const [serverError, setServerError] = useState<string | null>(null);
 
   const validate = (): boolean => {
     const errs: FormErrors = {};
 
     if (!form.name.trim()) {
-      errs.name = "Name is required";
+      errs.name = "Full name is required";
     }
 
     if (!form.email.trim()) {
-      errs.email = "Email ID is required";
+      errs.email = "Email address is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
       errs.email = "Please enter a valid email address";
     }
 
     const cleanPhone = form.phone.replace(/[\s\-\+\(\)]/g, "");
     if (!form.phone.trim()) {
-      errs.phone = "Phone Number is required";
+      errs.phone = "Mobile number is required";
     } else if (cleanPhone.length < 10) {
       errs.phone = "Please enter a valid 10-digit mobile number";
     }
@@ -126,26 +117,8 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
     const durationVal = form.duration;
     const messageVal = form.message.trim();
 
-    // 1. Construct & trigger WhatsApp redirection with pre-filled details
-    const formattedMessage =
-      `*New Student Inquiry — Youth Success Academy*\n\n` +
-      `👤 *Name:* ${nameVal}\n` +
-      `📧 *Email ID:* ${emailVal}\n` +
-      `📱 *Phone Number:* ${phoneVal}\n` +
-      `📍 *City:* ${cityVal}\n` +
-      `🎓 *Course:* ${courseVal}\n` +
-      `⏱️ *Duration:* ${durationVal}\n` +
-      (messageVal ? `💬 *Message:* ${messageVal}\n` : "") +
-      `\nHello YSA Team, I would like to enroll / book my free counseling session!`;
-
-    const encodedText = encodeURIComponent(formattedMessage);
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedText}`;
-
-    // Open WhatsApp in new window/tab
-    window.open(whatsappUrl, "_blank");
-
-    // 2. Simultaneously send POST request to Formspree in the background
     try {
+      // Step 2: Send the complete enquiry payload to Formspree
       const response = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         headers: {
@@ -159,30 +132,46 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
           city: cityVal,
           course: courseVal,
           duration: durationVal,
-          message: messageVal,
+          message: messageVal || "N/A",
           submittedAt: new Date().toISOString(),
         }),
       });
 
       if (response.ok) {
+        // Step 3: ONLY redirect to WhatsApp after successful email POST submission
+        const formattedMessage =
+          `Hello Youth Success Academy,\n\n` +
+          `I have submitted the enquiry form.\n\n` +
+          `Name: ${nameVal}\n` +
+          `Email: ${emailVal}\n` +
+          `Phone: ${phoneVal}\n` +
+          `City: ${cityVal}\n` +
+          `Course: ${courseVal}\n` +
+          `Duration: ${durationVal}\n` +
+          `Message: ${messageVal || "N/A"}\n\n` +
+          `Please contact me regarding admission.`;
+
+        const encodedText = encodeURIComponent(formattedMessage);
+        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedText}`;
+
+        // Automatically open WhatsApp chat
+        window.open(whatsappUrl, "_blank");
+
         setSubmittedName(nameVal);
-        setSubmittedCourse(courseVal);
         setSubmitting(false);
         setSubmitted(true);
+        // Reset form fields back to empty
         setForm(initialFormState);
       } else {
-        setSubmittedName(nameVal);
-        setSubmittedCourse(courseVal);
+        const data = await response.json().catch(() => ({}));
+        setServerError(
+          data.error || "Failed to submit enquiry email. Please check your details and try again."
+        );
         setSubmitting(false);
-        setSubmitted(true);
-        setForm(initialFormState);
       }
     } catch (err) {
-      setSubmittedName(nameVal);
-      setSubmittedCourse(courseVal);
+      setServerError("Network error occurred while submitting email. Please try again.");
       setSubmitting(false);
-      setSubmitted(true);
-      setForm(initialFormState);
     }
   };
 
@@ -202,7 +191,7 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
           Enquire Now &amp; Book Free Session
         </h3>
         <p className="text-xs sm:text-sm text-gray-500 mt-1" style={{ fontFamily: "var(--font-inter)" }}>
-          Fill in your details below to get instant course info and connect with our mentors.
+          Fill in your details below and our admissions team will get in touch with you.
         </p>
       </div>
 
@@ -222,10 +211,10 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
               className="text-lg font-bold text-gray-900 mb-2"
               style={{ fontFamily: "var(--font-outfit)" }}
             >
-              Inquiry Sent &amp; WhatsApp Opened!
+              Enquiry Submitted &amp; WhatsApp Opened!
             </h4>
             <p className="text-xs sm:text-sm text-gray-600 max-w-md mx-auto mb-5 leading-relaxed">
-              Thank you, <span className="font-semibold text-gray-900">{submittedName}</span>. Your inquiry for <span className="font-semibold text-[#C9A558]">{submittedCourse}</span> has been received and WhatsApp has been launched with your pre-filled message.
+              Thank you, <span className="font-semibold text-gray-900">{submittedName}</span>. Your enquiry has been sent to our admissions team and WhatsApp has been opened with your prefilled details.
             </p>
 
             <button
@@ -234,14 +223,14 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
               }}
               className="btn-gold text-xs py-2.5 px-6 font-semibold"
             >
-              Submit Another Request
+              Submit Another Inquiry
             </button>
           </motion.div>
         ) : (
           <form id="lead-enquiry-form" onSubmit={handleSubmit} noValidate className="space-y-4">
             {serverError && (
-              <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-start gap-2">
-                <AlertCircle size={15} className="shrink-0 mt-0.5" />
+              <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-start gap-2">
+                <AlertCircle size={16} className="shrink-0 mt-0.5" />
                 <span>{serverError}</span>
               </div>
             )}
@@ -262,7 +251,7 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
                   name="name"
                   value={form.name}
                   onChange={handleChange}
-                  placeholder="e.g. Rahul Sharma"
+                  placeholder="Enter your full name"
                   className={`input-premium text-xs sm:text-sm ${
                     errors.name ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500" : ""
                   }`}
@@ -281,7 +270,7 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
                   className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-1"
                   style={{ fontFamily: "var(--font-outfit)" }}
                 >
-                  Email ID *
+                  Email *
                 </label>
                 <input
                   id="lead-email"
@@ -289,7 +278,7 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  placeholder="rahul@gmail.com"
+                  placeholder="Enter your email address"
                   className={`input-premium text-xs sm:text-sm ${
                     errors.email ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500" : ""
                   }`}
@@ -303,7 +292,7 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
               </div>
             </div>
 
-            {/* Phone Number & City Grid */}
+            {/* Phone & City Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label
@@ -311,7 +300,7 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
                   className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-1"
                   style={{ fontFamily: "var(--font-outfit)" }}
                 >
-                  Phone Number *
+                  Phone *
                 </label>
                 <input
                   id="lead-phone"
@@ -319,7 +308,7 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
                   name="phone"
                   value={form.phone}
                   onChange={handleChange}
-                  placeholder="+91 91753 86755"
+                  placeholder="Enter your mobile number"
                   className={`input-premium text-xs sm:text-sm ${
                     errors.phone ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500" : ""
                   }`}
@@ -346,7 +335,7 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
                   name="city"
                   value={form.city}
                   onChange={handleChange}
-                  placeholder="e.g. Pune"
+                  placeholder="Enter your city"
                   className={`input-premium text-xs sm:text-sm ${
                     errors.city ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500" : ""
                   }`}
@@ -368,7 +357,7 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
                   className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-1"
                   style={{ fontFamily: "var(--font-outfit)" }}
                 >
-                  Select Course *
+                  Course *
                 </label>
                 <select
                   id="lead-course"
@@ -376,11 +365,16 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
                   value={form.course}
                   onChange={handleChange}
                   className={`input-premium bg-white cursor-pointer text-xs sm:text-sm ${
+                    !form.course ? "text-gray-400" : "text-gray-900"
+                  } ${
                     errors.course ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500" : ""
                   }`}
                 >
+                  <option value="" disabled hidden>
+                    Select a course
+                  </option>
                   {courseOptions.map((c) => (
-                    <option key={c} value={c}>
+                    <option key={c} value={c} className="text-gray-900">
                       {c}
                     </option>
                   ))}
@@ -399,7 +393,7 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
                   className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-1"
                   style={{ fontFamily: "var(--font-outfit)" }}
                 >
-                  Select Duration *
+                  Duration *
                 </label>
                 <select
                   id="lead-duration"
@@ -407,11 +401,16 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
                   value={form.duration}
                   onChange={handleChange}
                   className={`input-premium bg-white cursor-pointer text-xs sm:text-sm ${
+                    !form.duration ? "text-gray-400" : "text-gray-900"
+                  } ${
                     errors.duration ? "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500" : ""
                   }`}
                 >
+                  <option value="" disabled hidden>
+                    Select duration
+                  </option>
                   {durationOptions.map((d) => (
-                    <option key={d} value={d}>
+                    <option key={d} value={d} className="text-gray-900">
                       {d}
                     </option>
                   ))}
@@ -425,14 +424,14 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
               </div>
             </div>
 
-            {/* Your Message */}
+            {/* Message */}
             <div>
               <label
                 htmlFor="lead-message"
                 className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-1"
                 style={{ fontFamily: "var(--font-outfit)" }}
               >
-                Your Message
+                Message
               </label>
               <textarea
                 id="lead-message"
@@ -440,8 +439,8 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
                 value={form.message}
                 onChange={handleChange}
                 rows={2}
-                placeholder="Tell us about your goal or specific questions..."
-                className="textarea-premium min-h-[75px] text-xs sm:text-sm"
+                placeholder="Tell us about your goals or questions..."
+                className="textarea-premium min-h-[75px] text-xs sm:text-sm text-gray-900"
               />
             </div>
 
@@ -464,11 +463,6 @@ export default function LeadContactForm({ defaultCourse = "" }: { defaultCourse?
                 </>
               )}
             </button>
-
-            <p className="text-[11px] text-gray-400 text-center flex items-center justify-center gap-1">
-              <WhatsAppIcon size={13} />
-              <span>Connects instantly on WhatsApp &amp; sends lead to YSA</span>
-            </p>
           </form>
         )}
       </AnimatePresence>
